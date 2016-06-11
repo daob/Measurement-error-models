@@ -5,10 +5,10 @@ description : "Evaluating measurement error without a gold standard"
 attachments :
   slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-1-slides-2016-summer.pdf?forcedownload=1
 
---- type:NormalExercise lang:r xp:50 skills:7 key:39a225af5a
+--- type:NormalExercise lang:r xp:50 skills:7 
 ## A first look at the European Social Survey data 
 
-In the [//www.europeansocialsurvey.org/data/download.html?r=7](European Social Survey round 7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
+In the European Social Survey round 7  [http://www.europeansocialsurvey.org/data/download.html?r=7], data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
 
 This dataset has the following variables in it:
 
@@ -27,7 +27,7 @@ This dataset has the following variables in it:
 	*  BMI : Body mass index (recode of ESS variables HEIGHT and WEIGHT)
 	*  health_problems : Number of health problems (recode of ESS variables HLTHPRxx)
 
-See the link above for the full questionnaire, and the [//www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf](ESS "variables and questions" Appendix) for a full list of variables and their names and possible values.
+See the link above for the full questionnaire, and the ESS "variables and questions" Appendix [http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf] for a full list of variables and their names and possible values.
 
 *** =instructions 
 
@@ -41,6 +41,12 @@ See the link above for the full questionnaire, and the [//www.europeansocialsurv
 *** =solution
 ```{r}
 summary(ess7_health)
+```
+
+*** =sample_code
+```{r}
+# You can execute code by typing it here and pressing Ctrl+Enter
+# Type your code below this line before you submit: 
 ```
 
 *** =pre_exercise_code
@@ -74,11 +80,15 @@ test_function("summary", args = "object",
               not_called_msg = "You didn't call `summary()`!",
               incorrect_msg = "You didn't call `summary(object = ...)` with the correct argument, `object`.")
 
+# Notice that we didn't define any feedback here, this will cause automatically 
+# generated feedback to be given to the student in case of an incorrect submission
+test_object("ess7_health")
+
 test_error()
 
 ```
 
---- type:NormalExercise lang:r xp:100 skills:7 key:34bb54f0b5
+--- type:NormalExercise lang:r xp:100 skills:7 
 ## Criterion correlations
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
