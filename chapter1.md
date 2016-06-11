@@ -102,6 +102,23 @@ Possibly helpful: the [http://www.europeansocialsurvey.org/docs/round7/survey/ES
  - Remember R code is cAsE SENSITIVE and check for any typos
 
 
+*** =pre_exercise_code
+```{r}
+library(psych)
+library(lavaan)
+library(semTools)
+library(dplyr)
+
+# The pre exercise code runs code to initialize the user's workspace. You can use it for several things:
+
+# 1. Preload a dataset. The code below will read the csv that is stored at the URL's location.
+# The movies variable will be available in the user's console.
+load(url("http://daob.nl/files/SURV730/ess7_health.rdata"))
+
+options(digits = 4)
+
+```
+
 *** =sample_code
 ```{r}
 # ess7_health is available in your workspace
