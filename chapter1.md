@@ -209,7 +209,7 @@ success_msg("Good work!")
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:9576140612
 
 ## Interpreting the criterion correlations
 
@@ -232,7 +232,7 @@ success_msg("That is right, it is also not clear what we would have expected her
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:e47168f111
 
 ## Interpreting the criterion correlations, cont.
 
