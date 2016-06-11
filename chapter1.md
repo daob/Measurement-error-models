@@ -70,14 +70,9 @@ options(digits = 4)
 # Test whether the function str is called with the correct argument, object
 # If it is not called, print something informative
 # If it is called, but called incorrectly, print something else
-test_function("summary", args = "object",
+test_function("summary", args = "ess7_health",
               not_called_msg = "You didn't call `summary()`!",
               incorrect_msg = "You didn't call `summary(object = ...)` with the correct argument, `object`.")
-
-# Test the object, good_movies
-# Notice that we didn't define any feedback here, this will cause automatically 
-# generated feedback to be given to the student in case of an incorrect submission
-test_object("ess7_health")
 
 test_error()
 
