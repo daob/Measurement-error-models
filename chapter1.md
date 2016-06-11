@@ -306,10 +306,12 @@ fit <- cfa(model, data = ess7_health)
 # 	standardized loadings will be the consistency coefficients 
 summary(fit, standardized = TRUE)
 
-# Below, change the analysis so health_problems is also included as an indicator
-# 	the result should again be assigned to the "fit" variable.
+# A different way of getting at these is:
+consistencies <- standardizedSolution(fit) %>% filter(op == "=~")
+consistencies
 
 
+# Change the analysis so health_problems is also included as an indicator.
 ```
 
 *** =solution
@@ -329,6 +331,10 @@ fit <- cfa(model, data = ess7_health)
 # 	standardized loadings will be the consistency coefficients 
 summary(fit, standardized = TRUE)
 
+# A different way of getting at these is:
+consistencies <- standardizedSolution(fit) %>% filter(op == "=~")
+consistencies
+
 ```
 
 *** =sct
@@ -336,7 +342,13 @@ summary(fit, standardized = TRUE)
 
 test_function("cfa")
 
+test_function("summary", args = "object",
+              not_called_msg = "You didn't call `summary()`!",
+              incorrect_msg = "You didn't call `summary(object = ...)` with the correct argument, `object`.")
+
 test_object("fit")
+
+test_object("consistencies")
 
 test_error()
 
