@@ -333,9 +333,6 @@ summary(fit, standardized = TRUE)
 
 *** =sct
 ```{r}
-model <- "health_latent =~ dshltgp + health + slprl + health_problems"
-
-fit <- cfa(model, data = ess7_health)
 
 test_function("cfa")
 
@@ -375,7 +372,7 @@ success_msg("Correct.")
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:2fc7f7d28e
 
-## Interpreting confirmatory factor analysis
+## Interpreting confirmatory factor analysis, cont.
 
 After an additional indicator was used to measure the latent concept "health_latent", the internal consistency  estimate for "GP" changed. What could be the explanation?
 
