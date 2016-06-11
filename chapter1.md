@@ -344,7 +344,7 @@ success_msg("Good work!")
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7  
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7   key:2fc7f7d28e
 
 ## Interpreting confirmatory factor analysis
 
@@ -370,7 +370,7 @@ success_msg("Correct.")
 
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7  
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7   key:15588e64e7
 
 ## Interpreting confirmatory factor analysis, cont.
 
