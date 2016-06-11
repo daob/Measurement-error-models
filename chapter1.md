@@ -255,3 +255,146 @@ success_msg("Correct. It just doesn't really help to know this at all.")
 ```
 
 
+
+--- type:NormalExercise lang:r xp:100 skills:7  
+## Internal consistency with factor analysis
+
+As explained in Unit 2, when there are no repeated measures of the same _question_, we can use repeated measures 
+of the same _concept_ to get at the "internal consistency". 
+
+This code uses the `cfa` function from the `lavaan` library, which is very flexible. The [model syntax](http://lavaan.ugent.be/tutorial/syntax1.html) is relatively easy to read: in this example, we only need to define which variables are regressed on the latent variable (concept) `health_latent`. This is done by using the `=~` operator, which means "is measured by".
+
+Note that the results here may be different from those in the slides. 
+
+If you would like to learn more on doing confirmatory factor analysis in R using `lavaan`, the tutorial at <http://lavaan.ugent.be/tutorial/cfa.html> is a good place to start. I can also recommend the book by Beaujean (see [here](http://lavaan.ugent.be/resources/books.html)) with accompanying R code.
+
+*** =instructions
+ - Estimate the internal consistency coefficient of "discussing health with GP" based on the same three indicators as in the slides: GP, self-rated health, and sleeping problems.
+ - Change the code to also use the number of reported health problems as an indicator 
+ - Interpret the "Std.all" coefficients as the internal consistency  coefficients 
+
+*** =hint
+ 
+*** =pre_exercise_code
+```{r}
+library(psych)
+library(lavaan)
+library(semTools)
+library(dplyr)
+load(url("http://daob.nl/files/SURV730/ess7_health.rdata"))
+
+options(digits = 4)
+
+```
+
+*** =sample_code
+```{r}
+library(lavaan)
+
+# Use the cfa function from the lavaan package to fit a 
+#	confirmatory factor analysis (CFA) model that gives the 
+#	internal consistency  coefficients as "standardized loadings" (or "coefficients")  
+
+# The latent concept "health_latent" is posited to be 
+#		the common cause of these three variables ("indicators")
+model <- "health_latent =~ dshltgp + health + slprl"
+
+# Fit the model in lavaan and assign the result to a variable
+fit <- cfa(model, data = ess7_health)
+
+# Print the output of the CFA 
+# 	standardized loadings will be the consistency coefficients 
+summary(fit, standardized = TRUE)
+
+# Below, change the analysis so health_problems is also included as an indicator
+# 	the result should again be assigned to the "fit" variable.
+
+
+```
+
+*** =solution
+```{r}
+# Use the cfa function from the lavaan package to fit a 
+#	confirmatory factor analysis (CFA) model that gives the 
+#	internal consistency  coefficients as "standardized loadings" (or "coefficients")  
+
+# The latent concept "health_latent" is posited to be 
+#		the common cause of these three variables ("indicators")
+model <- "health_latent =~ dshltgp + health + slprl + health_problems"
+
+# Fit the model in lavaan and assign the result to a variable
+fit <- cfa(model, data = ess7_health)
+
+# Print the output of the CFA 
+# 	standardized loadings will be the consistency coefficients 
+summary(fit, standardized = TRUE)
+
+```
+
+*** =sct
+```{r}
+model <- "health_latent =~ dshltgp + health + slprl + health_problems"
+
+fit <- cfa(model, data = ess7_health)
+
+test_function("cfa")
+
+test_object("fit")
+
+test_error()
+
+success_msg("Good work!")
+```
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+
+## Interpreting confirmatory factor analysis
+
+Assuming that the CFA model is true, which indicator had the highest internal consistency?
+
+*** =instructions
+- Discussing health with GP
+- Self-reported health
+- Sleeping problems
+- Health problems
+
+*** =hint
+- If all the assumptions of this method hold, 
+the internal consistency  coefficients are equal to the standardized loadings
+- These are reported by lavaan as "Std.all" coefficients under "=~"
+
+*** =sct
+```{r}
+test_mc(correct = 2)
+
+success_msg("Correct.")
+```
+
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+
+## Interpreting confirmatory factor analysis
+
+After an additional indicator was used to measure the latent concept "health_latent", the internal consistency  estimate for "GP" changed. What could be the explanation?
+
+*** =instructions
+- Sampling fluctuations
+- Violation of assumptions
+- Both sampling and assumption violations
+- None of the above
+
+*** =hint
+- The internal consistency estimate is completely based on the consistency among the indicators: the higher this is, the higher the estimate will be. 
+
+
+*** =sct
+```{r}
+test_mc(correct = 3)
+
+success_msg("If the model is true (so no assumptions are violated) and there is infinite data, using more indicators will not change the consistency estimate. So either sampling or assumption violations can cause this change.")
+```
+
+
+
