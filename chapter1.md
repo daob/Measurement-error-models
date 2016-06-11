@@ -70,7 +70,7 @@ options(digits = 4)
 # Test whether the function str is called with the correct argument, object
 # If it is not called, print something informative
 # If it is called, but called incorrectly, print something else
-test_function("summary", args = "ess7_health",
+test_function("summary", args = "object",
               not_called_msg = "You didn't call `summary()`!",
               incorrect_msg = "You didn't call `summary(object = ...)` with the correct argument, `object`.")
 
