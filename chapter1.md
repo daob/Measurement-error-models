@@ -8,7 +8,7 @@ attachments :
 --- type:NormalExercise lang:r xp:50 skills:7  key:39a225af5a
 ## A first look at the European Social Survey data 
 
-In the European Social Survey round 7  (http://www.europeansocialsurvey.org/data/download.html?r=7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
+In the European Social Survey round 7  <http://www.europeansocialsurvey.org/data/download.html?r=7>, data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
 
 This dataset has the following variables in it:
 
@@ -93,9 +93,9 @@ test_error()
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
 
-Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read: (https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)
+Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read: <https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html>
 
-Possibly helpful: the ESS "variables and questions" Appendix for a full list of variables and their names and possible values: (http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf)
+Possibly helpful: the ESS "variables and questions" Appendix for a full list of variables and their names and possible values: <http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf>
 
 *** =instructions
  - Correlate health discussion with the GP with the following variables: doing sports, sleeping problems, body-mass index, and age. Check this gives the same result as in the slides
