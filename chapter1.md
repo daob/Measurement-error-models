@@ -8,7 +8,7 @@ attachments :
 --- type:NormalExercise lang:r xp:50 skills:7  key:39a225af5a
 ## A first look at the European Social Survey data 
 
-In the European Social Survey round 7  [http://www.europeansocialsurvey.org/data/download.html?r=7], data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
+In the European Social Survey round 7  (http://www.europeansocialsurvey.org/data/download.html?r=7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
 
 This dataset has the following variables in it:
 
@@ -27,7 +27,7 @@ This dataset has the following variables in it:
 	*  BMI : Body mass index (recode of ESS variables HEIGHT and WEIGHT)
 	*  health_problems : Number of health problems (recode of ESS variables HLTHPRxx)
 
-See the link above for the full questionnaire, and the ESS "variables and questions" Appendix [http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf] for a full list of variables and their names and possible values.
+See the link above for the full questionnaire, and the ESS "variables and questions" Appendix (http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf) for a full list of variables and their names and possible values.
 
 *** =instructions 
 
@@ -93,9 +93,9 @@ test_error()
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
 
-Note that the example code uses [https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html](`dplyr`) pipes and the `select` function. This is not mandatory but just easier to read.
+Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read: (https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)
 
-Possibly helpful: the [http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf](ESS "variables and questions" Appendix) for a full list of variables and their names and possible values.
+Possibly helpful: the ESS "variables and questions" Appendix for a full list of variables and their names and possible values: (http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf)
 
 *** =instructions
  - Correlate health discussion with the GP with the following variables: doing sports, sleeping problems, body-mass index, and age. Check this gives the same result as in the slides
@@ -128,14 +128,29 @@ options(digits = 4)
 ```{r}
 # ess7_health is available in your workspace
 
-# Correlate discussing health with GP with the following variables: doing sports, sleeping problems, body-mass index, and age
-#   (the argument "pairwise.complete.obs" for the `cor` function deletes missing values for each pair of variables)
-ess7_health %>% 
-  select(dshltgp, dosprt, <complete this>) %>% 
-  cor(use = "pairwise.complete.obs")
+# Correlate discussing health with GP with the following variables: 
+#	doing sports, sleeping problems, body-mass index, and age
+#   (the argument "pairwise.complete.obs" for the `cor` function 
+#		deletes missing values for each pair of variables)
 
-# Correlate with eating fruit and vegetables, happiness, eduction level, and being born in the country of residence
+criterion_slides <- ess7_health %>% select(dshltgp, dosprt, <complete this>) %>% cor(use = "pairwise.complete.obs")
 
+# To make it easier to check your answer, 
+#	sort by name and output only correlations with GP: 
+criterion_slides <- criterion_slides["dshltgp", sort(colnames(criterion_slides)[-1])] 
+criterion_slides
+
+# Now correlate with eating fruit and vegetables, happiness, 
+#	education level, and being born in the country of residence
+# And assign the result to criterion_extra
+
+criterion_extra <- <complete this>
+
+
+# To make it easier to check your answer, 
+#	sort by name and output only correlations with GP: 
+criterion_extra <- criterion_extra["dshltgp", sort(colnames(criterion_extra)[-1])] 
+criterion_extra
 ```
 
 *** =solution
@@ -143,14 +158,18 @@ ess7_health %>%
 # movie_selection is available in your workspace
 
 # Correlate discussing health with GP with the following variables: doing sports, age, sleeping problems, and body-mass index
-ess7_health %>% 
-  select(dshltgp, dosprt, agea, slprl, BMI) %>% 
-  cor(use = "pairwise.complete.obs")
+criterion_slides <- 
+	ess7_health %>% 
+	  select(dshltgp, dosprt, agea, slprl, BMI) %>% 
+	  cor(use = "pairwise.complete.obs") 
+criterion_slides <- criterion_slides["dshltgp", sort(colnames(criterion_slides)[-1])] 
 
 # Correlate with eating fruit and vegetables, happiness, eduction level, and being born in the country of residence
-ess7_health %>%
-  select(dshltgp, etfruit, eatveg, happy, eisced, brncntr) %>%
-  cor(use = "pairwise.complete.obs")
+criterion_extra <- 
+	ess7_health %>%
+  		select(dshltgp, etfruit, eatveg, happy, eisced, brncntr) %>%
+  		cor(use = "pairwise.complete.obs")
+criterion_extra <- criterion_extra["dshltgp", sort(colnames(criterion_extra)[-1])] 
 
 ```
 
@@ -160,6 +179,10 @@ ess7_health %>%
 # Test whether the student correctly used plot()
 # Again, we use the automatically generated feedback here
 test_function("cor")
+
+test_object(criterion_slides)
+
+test_object(criterion_extra)
 
 # It's always smart to include the following line of code at the end of your SCTs
 # It will check whether executing the student's code resulted in an error, 
