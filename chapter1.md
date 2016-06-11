@@ -3,12 +3,12 @@ title_meta  : Unit 2
 title       : Estimating measurement error in continuous variables
 description : "Evaluating measurement error without a gold standard"
 attachments :
-  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-2-slides-2016-summer.pdf?forcedownload=1
+  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-1-slides-2016-summer.pdf?forcedownload=1
 
 --- type:NormalExercise lang:r xp:50 skills:7
 ## A first look at the European Social Survey data 
 
-In the [http://www.europeansocialsurvey.org/data/download.html?r=7](European Social Survey round 7 (2014)), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
+In the [//www.europeansocialsurvey.org/data/download.html?r=7](European Social Survey round 7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
 
 This dataset has the following variables in it:
 
@@ -27,13 +27,21 @@ This dataset has the following variables in it:
 	*  BMI : Body mass index (recode of ESS variables HEIGHT and WEIGHT)
 	*  health_problems : Number of health problems (recode of ESS variables HLTHPRxx)
 
-See the link above for the full questionnaire, and the [http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf](ESS "variables and questions" Appendix) for a full list of variables and their names and possible values.
+See the link above for the full questionnaire, and the [//www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf](ESS "variables and questions" Appendix) for a full list of variables and their names and possible values.
 
 *** =instructions 
 
 - Check out the summary of `ess7_health`
 - Familiarize yourself with the R environment here
 - Once you are ready, click "submit"
+
+*** =hint
+ - Use the `summary` function to summarize `ess7_health`. 
+
+*** =solution
+```{r}
+summary(ess7_health)
+```
 
 *** =pre_exercise_code
 ```{r}
