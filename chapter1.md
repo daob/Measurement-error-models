@@ -5,7 +5,7 @@ description : "Evaluating measurement error without a gold standard"
 attachments :
   slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-1-slides-2016-summer.pdf?forcedownload=1
 
---- type:NormalExercise lang:r xp:50 skills:7
+--- type:NormalExercise lang:r xp:50 skills:7 key:39a225af5a
 ## A first look at the European Social Survey data 
 
 In the [//www.europeansocialsurvey.org/data/download.html?r=7](European Social Survey round 7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
@@ -83,7 +83,7 @@ test_error()
 
 ```
 
---- type:NormalExercise lang:r xp:100 skills:7
+--- type:NormalExercise lang:r xp:100 skills:7 key:34bb54f0b5
 ## Criterion correlations
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
