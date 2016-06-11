@@ -8,26 +8,28 @@ attachments :
 --- type:NormalExercise lang:r xp:50 skills:7  key:39a225af5a
 ## A first look at the European Social Survey data 
 
-In the European Social Survey round 7  <http://www.europeansocialsurvey.org/data/download.html?r=7>, data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
+In the [European Social Survey round 7](http://www.europeansocialsurvey.org/data/download.html?r=7), data have been collected on 28,221 European's health (among many other topics). I have downloaded and recoded some of these data. You have them available in the R prompt as `ess7_health`. 
 
 This dataset has the following variables in it:
 
-	*  dshltgp : DISCUSSED HEALTH, LAST 12 MONTHS: GENERAL PRACTITIONER 
-	*  dosprt : DO SPORTS OR OTHER PHYSICAL ACTIVITY, HOW MANY OF LAST 7 DAYS
-	*  alcfreq : HOW OFTEN DRINK ALCOHOL
-	*  etfruit : HOW OFTEN EAT FRUIT, EXCLUDING DRINKING JUICE
-	*  eatveg : HOW OFTEN EAT VEGETABLES OR SALAD, EXCLUDING POTATOES
-	*  health : SUBJECTIVE GENERAL HEALTH
-	*  happy : HOW HAPPY ARE YOU
-	*  slprl : SLEEP WAS RESTLESS, HOW OFTEN PAST WEEK
-	*  agea : Age
-	*  eisced : Education level
-	*  brncntr : BORN IN COUNTRY
-	*  smoke : Whether person currently smokes (recode of ESS variable CGTSMKE)
-	*  BMI : Body mass index (recode of ESS variables HEIGHT and WEIGHT)
-	*  health_problems : Number of health problems (recode of ESS variables HLTHPRxx)
+*  dshltgp : DISCUSSED HEALTH, LAST 12 MONTHS: GENERAL PRACTITIONER 
+*  dosprt : DO SPORTS OR OTHER PHYSICAL ACTIVITY, HOW MANY OF LAST 7 DAYS
+*  alcfreq : HOW OFTEN DRINK ALCOHOL
+*  etfruit : HOW OFTEN EAT FRUIT, EXCLUDING DRINKING JUICE
+*  eatveg : HOW OFTEN EAT VEGETABLES OR SALAD, EXCLUDING POTATOES
+*  health : SUBJECTIVE GENERAL HEALTH
+*  happy : HOW HAPPY ARE YOU
+*  slprl : SLEEP WAS RESTLESS, HOW OFTEN PAST WEEK
+*  agea : Age
+*  eisced : Education level
+*  brncntr : BORN IN COUNTRY
+*  smoke : Whether person currently smokes (recode of ESS variable CGTSMKE)
+*  BMI : Body mass index (recode of ESS variables HEIGHT and WEIGHT)
+*  health_problems : Number of health problems (recode of ESS variables HLTHPRxx)
 
-See the link above for the full questionnaire, and the ESS "variables and questions" Appendix (http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf) for a full list of variables and their names and possible values.
+You may want to *copy-paste this list into a text file for future reference*.
+
+See the link above for the full questionnaire, and the [ESS "variables and questions" Appendix](http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf) for a full list of variables and their names and possible values.
 
 *** =instructions 
 
@@ -93,9 +95,9 @@ test_error()
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
 
-Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read: <https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html>
+Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read, see <https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html>
 
-Possibly helpful: the ESS "variables and questions" Appendix for a full list of variables and their names and possible values: <http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf>
+Possibly helpful: the [ESS "variables and questions" Appendix](http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf) for a full list of variables and their names and possible values.
 
 *** =instructions
  - Correlate health discussion with the GP with the following variables: doing sports, sleeping problems, body-mass index, and age. Check this gives the same result as in the slides
@@ -104,8 +106,9 @@ Possibly helpful: the ESS "variables and questions" Appendix for a full list of 
 
 *** =hint
  - You can look at correlations with additional variables by adding these to the `select` statement
- - Remember R code is cAsE SENSITIVE and check for any typos
-
+ - Remember R code is cAsE SENSITIVE and check for any typos (note most variable names here are in lower case)
+ - If you need to know more about the variables, check out the Appendix linked above 
+ - Check that the code provided to output only the correlations with GP, in alphabetical order, is used for both parts
 
 *** =pre_exercise_code
 ```{r}
@@ -204,3 +207,51 @@ test_error()
 # Final message the student will see upon completing the exercise
 success_msg("Good work!")
 ```
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+
+## Interpreting the criterion correlations
+
+Looking at the criterion correlations, one of them is close to zero. Which one is that?
+
+*** =instructions
+- Eating fruit
+- Born in country
+- Happiness
+- Education level
+
+*** =hint
+Look at the `criterion_extra` output from the previous exercise
+
+*** =sct
+```{r}
+test_mc(correct = 2)
+
+success_msg("That is right, it is also not clear what we would have expected here. Maybe immigrants are unhealthier and need more treatment (negative association), or maye they are less able to find their way to the GP (positive association).")
+```
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+
+## Interpreting the criterion correlations, cont.
+
+What can we conclude from the fact that the criterion correlation with "born in country" is so small?
+
+*** =instructions
+- The validity of this question is low 
+- The reliability of this question is low
+- The criterion variable has low validity 
+- Nothing
+
+*** =hint
+Think back to the disadvantages of criterion validity from the slides.
+
+*** =sct
+```{r}
+test_mc(correct = 4)
+
+success_msg("Correct. It just doesn't really help to know this at all.")
+```
+
+
