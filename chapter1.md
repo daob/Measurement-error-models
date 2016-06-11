@@ -256,7 +256,7 @@ success_msg("Correct. It just doesn't really help to know this at all.")
 
 
 
---- type:NormalExercise lang:r xp:100 skills:7  
+--- type:NormalExercise lang:r xp:100 skills:7   key:64b7b63cd3
 ## Internal consistency with factor analysis
 
 As explained in Unit 2, when there are no repeated measures of the same _question_, we can use repeated measures 
@@ -347,7 +347,7 @@ success_msg("Good work!")
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:2fc7f7d28e
 
 ## Interpreting confirmatory factor analysis
 
@@ -373,7 +373,7 @@ success_msg("Correct.")
 
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:2fc7f7d28e
 
 ## Interpreting confirmatory factor analysis
 
