@@ -175,14 +175,26 @@ criterion_extra <- criterion_extra["dshltgp", sort(colnames(criterion_extra)[-1]
 
 *** =sct
 ```{r}
+criterion_slides <- 
+	ess7_health %>% 
+	  select(dshltgp, dosprt, agea, slprl, BMI) %>% 
+	  cor(use = "pairwise.complete.obs") 
+criterion_slides <- criterion_slides["dshltgp", sort(colnames(criterion_slides)[-1])] 
+
+# Correlate with eating fruit and vegetables, happiness, eduction level, and being born in the country of residence
+criterion_extra <- 
+	ess7_health %>%
+  		select(dshltgp, etfruit, eatveg, happy, eisced, brncntr) %>%
+  		cor(use = "pairwise.complete.obs")
+criterion_extra <- criterion_extra["dshltgp", sort(colnames(criterion_extra)[-1])] 
 
 # Test whether the student correctly used plot()
 # Again, we use the automatically generated feedback here
 test_function("cor")
 
-test_object(criterion_slides)
+test_object("criterion_slides")
 
-test_object(criterion_extra)
+test_object("criterion_extra")
 
 # It's always smart to include the following line of code at the end of your SCTs
 # It will check whether executing the student's code resulted in an error, 
