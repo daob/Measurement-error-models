@@ -1,7 +1,7 @@
-
 ---
-title       : Unit 2: What is measurement error?
-description : Evaluating measurement error without a gold standard
+title_meta  : Unit 2
+title       : Estimating measurement error in continuous variables
+description : "Evaluating measurement error without a gold standard"
 attachments :
   slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-2-slides-2016-summer.pdf?forcedownload=1
 
