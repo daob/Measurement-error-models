@@ -406,7 +406,7 @@ success_msg("If the model is true (so no assumptions are violated) and there is 
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7   
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7    key:477d905861
 
 ## Multitrait-multimethod models: looking at correlations
 
@@ -456,7 +456,7 @@ test_mc(correct = 2)
 success_msg("Indeed that seems the case for these data, and this seems like a good thing. This classification of groups of correlations is due to Campbell and Fiske (1959), who based their assessment of the measurement properties purely on the type of consideration you have just done.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:7  
+--- type:NormalExercise lang:r xp:100 skills:7   key:4d0e7de841
 
 ## Multitrait-multimethod models
 
