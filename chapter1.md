@@ -95,7 +95,7 @@ test_error()
 
 In this exercise, you will start by reproducing the "criterion correlations" for discussing your health with a general practiction (GP) from the slides. Then you will look at other variables in the dataset.
 
-Note that the example code uses `dplyr` pipes and the `select` function. This is not mandatory but just easier to read, see <https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html>
+Note that the example code uses `dplyr` pipes, the `select` function, and friends. This is not mandatory but just easier to read. See <https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html> if you'd like to find out more about using `dplyr`.
 
 Possibly helpful: the [ESS "variables and questions" Appendix](http://www.europeansocialsurvey.org/docs/round7/survey/ESS7_appendix_a7_e03_0.pdf) for a full list of variables and their names and possible values.
 
@@ -310,8 +310,8 @@ summary(fit, standardized = TRUE)
 consistencies <- standardizedSolution(fit) %>% filter(op == "=~")
 consistencies
 
-
 # Change the analysis so health_problems is also included as an indicator.
+
 ```
 
 *** =solution
@@ -406,4 +406,155 @@ success_msg("If the model is true (so no assumptions are violated) and there is 
 ```
 
 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7   
 
+## Multitrait-multimethod models: looking at correlations
+
+The correlations between the variables measured in the multitrait-multimethod (MTMM) experiment from the slides from Saris & Gallhofer are available in the workspace as `R`. The "correlation plot" to the right shows these as larger or smaller circles. The larger the circle, the stronger the correlation (positive or negative).
+
+The variables have been renamed to show which "trait" (survey question) and "method" (way of asking the question) they correspond to. For example, T1M1 might refer to "satisfaction with the economy" (T1) measured on a four point scale (M1), and T1M2 to "satisfaction with the economy" (T1) measured on an eleven point scale (M2).
+
+Which correlations from the MTMM experiment are strongest?
+
+*** =instructions
+- Those between different questions measured in the same way ("heterotrait-monomethod")
+- Those between the same questions measured in different ways ("monotrait-heteromethod")
+- Those between different questions measured in different ways ("heteromethod-heterotrait")
+- All the correlations are the same
+
+*** =hint
+Try to find the different groups of correlations mentioned in the picture. Which group has the largest circles overall? 
+
+*** =pre_exercise_code
+
+```{r}
+cors <- 
+"1000
+ 481  1000
+ 373  552  1000
+-626 -422 -410  1000
+-429 -663 -532  642  1000
+-453 -495 -669  612  693  1000
+-502 -347 -332  548  436  438  1000
+-370 -608 -399  429  653  466  556  1000
+-336 -406 -566  406  471  638  514  558  1000"
+
+library(lavaan)
+R <- lavaan::getCov(cors)/1000
+
+colnames(R) <- rownames(R) <-
+ paste0(paste0("T", rep(1:3, each = 3)),
+         paste0("M", rep(1:3, 3)))
+
+corrplot::corrplot(R)         
+```
+
+*** =sct
+```{r}
+test_mc(correct = 2)
+
+success_msg("Indeed that seems the case for these data, and this seems like a good thing. This classification of groups of correlations is due to Campbell and Fiske (1959), who based their assessment of the measurement properties purely on the type of consideration you have just done.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:7  
+
+## Multitrait-multimethod models
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+
+```{r}
+cors <- 
+"1000
+ 481  1000
+ 373  552  1000
+-626 -422 -410  1000
+-429 -663 -532  642  1000
+-453 -495 -669  612  693  1000
+-502 -347 -332  548  436  438  1000
+-370 -608 -399  429  653  466  556  1000
+-336 -406 -566  406  471  638  514  558  1000"
+
+library(lavaan)
+R <- lavaan::getCov(cors)/1000
+
+colnames(R) <- rownames(R) <-
+ paste0(paste0("T", rep(1:3, each = 3)),
+         paste0("M", rep(1:3, 3)))
+```
+
+*** =sample_code
+```{r}
+# Show the correlation matrix:
+R
+
+# Define the MTMM model below (see slides)
+model <- "
+  # Fill in the measurement of the traits and methods.
+  # Note that the names are T1M1, T1M2, etc.
+  
+  T1 ~~ T2 + T3
+  T2 ~~ T3
+"
+
+# Fit the model as a CFA using lavaan
+fit <- lavaan(model, sample.cov = R, 
+              sample.nobs = 424, std.lv = TRUE,
+              auto.cov.lv.x = FALSE, 
+              auto.fix.first = FALSE, auto.var = TRUE)
+                   
+# Summarize the results
+summary(fit, standardize = TRUE)
+
+# The standardized loadings (those with op "=~") are 
+#		the reliability coefficients (for Tx) 
+#   	and method effects (for Mx):
+std_estimates <- standardizedSolution(fit) %>% filter(op == "=~") %>% arrange(lhs, rhs)
+std_estimates
+```
+
+*** =solution
+```{r}
+# Show the correlation matrix:
+R
+
+# Define the MTMM model below (see slides)
+model <- "
+  M1 =~ T1M1 + T2M1 + T3M1
+  M2 =~ T1M2 + T2M2 + T3M2
+  M3 =~ T1M3 + T2M3 + T3M3
+
+  T1 =~ T1M1 + T1M2 + T1M3
+  T2 =~ T2M1 + T2M2 + T2M3
+  T3 =~ T3M1 + T3M2 + T3M3
+
+  T1 ~~ T2 + T3
+  T2 ~~ T3
+"
+
+# Fit the model as a CFA using lavaan
+fit <- lavaan(model, sample.cov = R, 
+              sample.nobs = 424, std.lv = TRUE,
+              auto.cov.lv.x = FALSE, 
+              auto.fix.first = FALSE, auto.var = TRUE)
+                   
+# Summarize the results
+summary(fit, standardize = TRUE)
+
+# The standardized loadings are the reliability coefficients (for Tx) 
+#   	and method effects (for Mx):
+std_estimates <- standardizedSolution(fit) %>% filter(op == "=~") %>% arrange(lhs, rhs)
+std_estimates
+```
+
+*** =sct
+```{r}
+test_object("std_estimates")
+
+test_error()
+
+success_msg("Awesome job. MTMM modeling is not easy but now you have it down already!")
+```
