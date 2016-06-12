@@ -617,7 +617,7 @@ success_msg("Awesome job. MTMM modeling is not easy but now you have it down alr
 
 These models can be used to estimate the measurement error variance in longitudinal data. Such data are available from the [LISS panel](https://www.lissdata.nl/lissdata/about-panel). 
 
-In the slides, error estimation in "internet use" using three timepoints (years 2008-2010) is explained. In the dataset, which is included in the `lavaan.survey` package as `liss`, a fourth timepoint, 2011, is also available. Adjust the model to the right so it also estimates the reliability in 2011.
+In the slides, error estimation in "internet use" using three timepoints (years 2008-2010) is explained. In the dataset, which is included in the `lavaan.survey` package as `liss`, a fourth timepoint, 2011, is also available (`cs11d247`). Adjust the model to the right to include `cs11d247` so it also estimates the reliability in 2011.
 
 The full study documentation as well as the raw data are publicly available at <http://www.lissdata.nl/dataarchive/study_units/view/6>. (BTW: LISS is an awesome publicly available longitudinal data source you should definitely check out if you're ever looking for high-quality social science data)
 
@@ -632,6 +632,9 @@ Please read the instructions below and in the comments to the right very careful
 - Read the instructions in the comments to the right very carefully
 - Make sure you adapt all three parts of the code: one line involving `cs11d247` 
 	should be added to each. 
+- Did you tell R that cs11 is measured by `cs11d247`? And set the loading to equal 1?
+- Did you regress the true score cs11 on the previous timepoint, cs10?
+- Did you estimate the error variance of `cs11d247`? And set it to equal the error variance of the other timepoints? 
 
 *** =pre_exercise_code
 
