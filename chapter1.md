@@ -486,6 +486,10 @@ Please read the instructions below and in the comments to the right very careful
 *** =pre_exercise_code
 
 ```{r}
+library(lavaan)
+library(dplyr)
+
+
 cors <- 
 "1000
  481  1000
@@ -508,6 +512,9 @@ colnames(R) <- rownames(R) <-
 
 *** =sample_code
 ```{r}
+library(lavaan)
+library(dplyr)
+
 # Show the correlation matrix:
 R
 
@@ -550,7 +557,7 @@ summary(fit, standardize = TRUE)
 # The standardized loadings (those with op "=~") are 
 #		the reliability coefficients (for Tx) 
 #   	and method effects (for Mx):
-std_estimates <- standardizedSolution(fit) %>% arrange(lhs, rhs)
+std_estimates <- standardizedSolution(fit) %>% dplyr::filter(op == "=~") %>% dplyr::arrange(lhs, rhs)
 std_estimates
 ```
 
@@ -587,7 +594,7 @@ summary(fit, standardize = TRUE)
 
 # The standardized loadings are the reliability coefficients (for Tx) 
 #   	and method effects (for Mx):
-std_estimates <- standardizedSolution(fit) %>% arrange(lhs, rhs)
+std_estimates <- standardizedSolution(fit) %>% dplyr::filter(op == "=~") %>% dplyr::arrange(lhs, rhs)
 std_estimates
 ```
 
