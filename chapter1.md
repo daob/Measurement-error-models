@@ -606,3 +606,111 @@ test_error()
 
 success_msg("Awesome job. MTMM modeling is not easy but now you have it down already!")
 ```
+
+
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:7
+
+## Quasi-simplex model
+
+These models can be used to estimate the measurement error variance in longitudinal data. Such data are available from the [LISS panel](https://www.lissdata.nl/lissdata/about-panel). 
+
+In the slides, error estimation in "internet use" using three timepoints (years 2008-2010) is explained. In the dataset, which is included in the `lavaan.survey` package as `liss`, a fourth timepoint, 2011, is also available. Adjust the model to the right so it also estimates the reliability in 2011.
+
+The full study documentation as well as the raw data are publicly available at <http://www.lissdata.nl/dataarchive/study_units/view/6>. (BTW: LISS is an awesome publicly available longitudinal data source you should definitely check out if you're ever looking for high-quality social science data)
+
+Please read the instructions below and in the comments to the right very carefully!
+
+*** =instructions
+- Change the quasi-simplex model for 2008-2010 to also include 2011
+- Do this by adding one additional line of code for each of the three parts of the model 
+- Note that the newly used observed variable's name is `cs11d247` (so with a d)
+
+*** =hint
+- Read the instructions in the comments to the right very carefully
+- Make sure you adapt all three parts of the code: one line involving `cs11d247` 
+	should be added to each. 
+
+*** =pre_exercise_code
+
+```{r}
+library(lavaan)
+library(lavaan.survey)
+library(dplyr)
+
+data(liss)
+```
+
+*** =sample_code
+```{r}
+# Formulate the quasi-simplex model for three timepoints
+# Adapt this to also include the measurement at 2011, cs11d247
+model.qs <- "
+  # The part where each true score variable at time t 
+  #    is measured by the survey answers at time t:
+  cs08 =~ 1 * cs08a247
+  cs09 =~ 1 * cs09b247
+  cs10 =~ 1 * cs10c247
+
+  # The part where the true score at time t 
+  #	    is regressed on the true score at time t-1:
+  # a.k.a. the "AR(1) process":
+  cs09 ~ cs08
+  cs10 ~ cs09
+
+  # The part where the measurement error variance is 
+  #		assumed equal over time:
+  cs08a247 ~~ vare * cs08a247
+  cs09b247 ~~ vare * cs09b247
+  cs10c247 ~~ vare * cs10c247
+"
+# Fit the quasi-simplex model with lavaan as a SEM:
+fit.liss <- lavaan(model.qs, auto.var = TRUE, data = liss)
+
+# Output the estimates, including reliability coefficients and stability across time:
+summary(fit.liss, standardized = TRUE)
+
+# This is to check the solution:
+std_estimates <- fit.liss %>% standardizedSolution %>% filter(op == "=~") %>% arrange(lhs, rhs)
+std_estimates
+```
+
+*** =solution
+```{r}
+
+
+model.qs <- "
+  cs08 =~ 1 * cs08a247
+  cs09 =~ 1 * cs09b247
+  cs10 =~ 1 * cs10c247
+  cs11 =~ 1 * cs11d247
+
+  cs09 ~ cs08
+  cs10 ~ cs09
+  cs11 ~ cs10
+
+  cs08a247 ~~ vare * cs08a247
+  cs09b247 ~~ vare * cs09b247
+  cs10c247 ~~ vare * cs10c247
+  cs11d247 ~~ vare * cs11d247
+
+"
+
+fit.liss <- lavaan(model.qs, auto.var = TRUE, data = liss)
+
+summary(fit.liss, standardized = TRUE)
+
+# This is to check the solution
+std_estimates <- fit.liss %>% standardizedSolution %>% filter(op == "=~") %>% arrange(lhs, rhs)
+```
+
+*** =sct
+```{r}
+test_object("std_estimates")
+
+test_error()
+
+success_msg("Awesome job. Quasi-simplex modeling is not easy but now you have it down already!")
+```
