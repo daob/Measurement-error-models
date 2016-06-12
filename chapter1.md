@@ -645,6 +645,9 @@ data(liss)
 
 *** =sample_code
 ```{r}
+library(lavaan.survey)
+data(liss) # Loads data from the lavaan.survey package
+
 # Formulate the quasi-simplex model for three timepoints
 # Adapt this to also include the measurement at 2011, cs11d247
 model.qs <- "
@@ -679,7 +682,8 @@ std_estimates
 
 *** =solution
 ```{r}
-
+library(lavaan.survey)
+data(liss) # Loads data from the lavaan.survey package
 
 model.qs <- "
   cs08 =~ 1 * cs08a247
