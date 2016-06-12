@@ -460,9 +460,28 @@ success_msg("Indeed that seems the case for these data, and this seems like a go
 
 ## Multitrait-multimethod models
 
+MTMM _models_ can be applied to MTMM _data_ to obtain estimates of the reliability coefficients and method effects. 
+
+Since the MTMM _design_ crosses "traits" (survey questions in our case) with "methods" (ways of asking those questions), this is a matter of specifying the right indicator for each factor in a factor analysis.
+
+This time, due to the study design, the interpretation of the standardized factor loadings is that they represent "reliability coefficients" and "method effects" of the questions studied. 
+
+Please read the instructions below and in the comments to the right very carefully!
+
 *** =instructions
+- Formulate the MTMM model for the correlations in the MTMM correlation matrix `R` by replacing the ... dots in the code to the right
+- Run the model to obtain estimates using the ready-made code
+- Interpret the results by looking at the standardized estimates. 
+- The standardized coefficients on the Tx factors are the reliability coefficient estimates
+- The standardized coefficients on the Mx factors are the method effect estimates
+
 
 *** =hint
+- Read the instructions in the comments to the right very carefully
+- Use the names of the variables: "T1M1" belongs to trait factor T1 and method factor M1, for instance
+- Make sure the method indicators each have their loading set to 1 by using the 1* suggested
+- Make sure the original code for the model is not accidentally removed: only change the dots.
+
 
 *** =pre_exercise_code
 
@@ -499,9 +518,14 @@ model <- "
 
   # Model for the methods: prefix every variable with 1*, 
   #			e.g use M1 =~ 1*T1M1 + ...
+  M1 =~ ...    						# Replace the dots 
+  M2 =~ ...
+  M3 =~ ...
 
   # Model for the traits: don't prefix indicators with anything
-
+  T1 =~ ...
+  T2 =~ ...
+  T3 =~ ...
 
   # This specifies that the traits correlate. You can leave it as-is
   T1 ~~ T2 + T3
