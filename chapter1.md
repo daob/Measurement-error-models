@@ -659,7 +659,7 @@ model.qs <- "
 
   # The part where the true score at time t 
   #	    is regressed on the true score at time t-1:
-  # a.k.a. the "AR(1) process":
+  # a.k.a. the 'AR(1) process':
   cs09 ~ cs08
   cs10 ~ cs09
 
