@@ -637,17 +637,13 @@ Please read the instructions below and in the comments to the right very careful
 
 ```{r}
 library(lavaan)
-library(lavaan.survey)
 library(dplyr)
 
-data(liss)
+load(url("http://daob.nl/files/SURV730/liss.rdata"))
 ```
 
 *** =sample_code
 ```{r}
-library(lavaan.survey)
-data(liss) # Loads data from the lavaan.survey package
-
 # Formulate the quasi-simplex model for three timepoints
 # Adapt this to also include the measurement at 2011, cs11d247
 model.qs <- "
@@ -682,8 +678,7 @@ std_estimates
 
 *** =solution
 ```{r}
-library(lavaan.survey)
-data(liss) # Loads data from the lavaan.survey package
+
 
 model.qs <- "
   cs08 =~ 1 * cs08a247
