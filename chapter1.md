@@ -611,7 +611,7 @@ success_msg("Awesome job. MTMM modeling is not easy but now you have it down alr
 
 
 
---- type:NormalExercise lang:r xp:100 skills:7
+--- type:NormalExercise lang:r xp:100 skills:7 key:8332ac4ad3
 
 ## Quasi-simplex model
 
