@@ -443,8 +443,8 @@ library(lavaan)
 R <- lavaan::getCov(cors)/1000
 
 colnames(R) <- rownames(R) <-
- paste0(paste0("T", rep(1:3, each = 3)),
-         paste0("M", rep(1:3, 3)))
+ paste0(paste0("T", rep(1:3, 3)),
+         paste0("M", rep(1:3, each=3)))
 
 corrplot::corrplot(R)         
 ```
@@ -482,8 +482,9 @@ library(lavaan)
 R <- lavaan::getCov(cors)/1000
 
 colnames(R) <- rownames(R) <-
- paste0(paste0("T", rep(1:3, each = 3)),
-         paste0("M", rep(1:3, 3)))
+ paste0(paste0("T", rep(1:3, 3)),
+         paste0("M", rep(1:3, each=3)))
+
 ```
 
 *** =sample_code
@@ -495,14 +496,27 @@ R
 model <- "
   # Fill in the measurement of the traits and methods.
   # Note that the names are T1M1, T1M2, etc.
-  
+
+  # Model for the methods: prefix every variable with "1*", 
+  #			e.g use M1 =~ 1*T1M1 + ...
+
+  # Model for the traits: don't prefix indicators with anything
+
+
+  # This specifies that the traits correlate. You can leave it as-is
   T1 ~~ T2 + T3
   T2 ~~ T3
+
+  # This identifies the latent trait variables by 
+  #		standardizing them to variance 1. You can leave it as-is.
+  T1 ~~ 1*T1
+  T2 ~~ 1*T2
+  T3 ~~ 1*T3
 "
 
 # Fit the model as a CFA using lavaan
 fit <- lavaan(model, sample.cov = R, 
-              sample.nobs = 424, std.lv = TRUE,
+              sample.nobs = 424, 
               auto.cov.lv.x = FALSE, 
               auto.fix.first = FALSE, auto.var = TRUE)
                    
@@ -523,21 +537,24 @@ R
 
 # Define the MTMM model below (see slides)
 model <- "
-  M1 =~ T1M1 + T2M1 + T3M1
-  M2 =~ T1M2 + T2M2 + T3M2
-  M3 =~ T1M3 + T2M3 + T3M3
+M1 =~ 1*T1M1 + 1*T2M1 + 1*T3M1
+M2 =~ 1*T1M2 + 1*T2M2 + 1*T3M2
+M3 =~ 1*T1M3 + 1*T2M3 + 1*T3M3
 
-  T1 =~ T1M1 + T1M2 + T1M3
-  T2 =~ T2M1 + T2M2 + T2M3
-  T3 =~ T3M1 + T3M2 + T3M3
+T1 =~ T1M1 + T1M2 + T1M3
+T2 =~ T2M1 + T2M2 + T2M3
+T3 =~ T3M1 + T3M2 + T3M3
 
-  T1 ~~ T2 + T3
-  T2 ~~ T3
-"
+T1 ~~ T2 + T3
+T2 ~~ T3
+
+T1 ~~ 1*T1
+T2 ~~ 1*T2
+T3 ~~ 1*T3"
 
 # Fit the model as a CFA using lavaan
 fit <- lavaan(model, sample.cov = R, 
-              sample.nobs = 424, std.lv = TRUE,
+              sample.nobs = 424, 
               auto.cov.lv.x = FALSE, 
               auto.fix.first = FALSE, auto.var = TRUE)
                    
