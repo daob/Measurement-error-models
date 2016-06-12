@@ -497,7 +497,7 @@ model <- "
   # Fill in the measurement of the traits and methods.
   # Note that the names are T1M1, T1M2, etc.
 
-  # Model for the methods: prefix every variable with "1*", 
+  # Model for the methods: prefix every variable with 1*, 
   #			e.g use M1 =~ 1*T1M1 + ...
 
   # Model for the traits: don't prefix indicators with anything
@@ -526,7 +526,7 @@ summary(fit, standardize = TRUE)
 # The standardized loadings (those with op "=~") are 
 #		the reliability coefficients (for Tx) 
 #   	and method effects (for Mx):
-std_estimates <- standardizedSolution(fit) %>% filter(op == "=~") %>% arrange(lhs, rhs)
+std_estimates <- standardizedSolution(fit) %>% arrange(lhs, rhs)
 std_estimates
 ```
 
@@ -563,7 +563,7 @@ summary(fit, standardize = TRUE)
 
 # The standardized loadings are the reliability coefficients (for Tx) 
 #   	and method effects (for Mx):
-std_estimates <- standardizedSolution(fit) %>% filter(op == "=~") %>% arrange(lhs, rhs)
+std_estimates <- standardizedSolution(fit) %>% arrange(lhs, rhs)
 std_estimates
 ```
 
