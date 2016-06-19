@@ -114,10 +114,10 @@ test_student_typed("tab_gender_GP %>% phi")
 test_student_typed("tab_gender_GP %>% Yule")
 test_student_typed("tab_gender_GP %>% my_log_odds_ratio")
 
-test_output_contains("$param$dshltgp.gndr")
-test_output_contains("-0.104")
-test_output_contains("gndr2:dshltgp2")
-test_output_contains("0.416")
+test_output_regex("gndr2:dshltgp2")
+test_output_regex("0\\.416")
+test_output_regex("dshltgp\\.gndr")
+test_output_regex("-0.104")
 
 test_error()
 
