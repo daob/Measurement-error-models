@@ -1,9 +1,9 @@
 ---
-title_meta  : Unit 2
-title       : Estimating measurement error in continuous variables
-description : "Evaluating measurement error without a gold standard"
+title_meta  : Unit 3
+title       : Estimating measurement error in categorical variables
+description : "Evaluating misclassification without a gold standard"
 attachments :
-  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-1-slides-2016-summer.pdf?forcedownload=1
+  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-3-slides-2016-summer.pdf?forcedownload=1
 
 --- type:NormalExercise lang:r xp:50 skills:7  key:39a225af5a
 ## Association measures for categorical variables
@@ -32,9 +32,6 @@ tab_gender_GP %>% phi
 tab_gender_GP %>% Yule
 
 # Different ways of getting the log-odds ratio from a table
-
-# Calculate it direclty using vcd package
-tab_gender_GP %>% vcd::loddsratio(.)
 
 # Calculate it by hand
 my_log_odds_ratio <- function(tab) {
@@ -70,8 +67,6 @@ tab_marijuana %>% Yule
 
 # Different ways of getting the log-odds ratio from a table
 
-# Calculate it direclty using vcd package
-tab_marijuana %>% vcd::loddsratio(.)
 
 # Calculate it by hand
 my_log_odds_ratio <- function(tab) {
