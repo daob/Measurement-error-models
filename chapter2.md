@@ -3,7 +3,7 @@ title_meta  : Unit 3
 title       : Estimating measurement error in categorical variables
 description : "Evaluating misclassification without a gold standard"
 attachments :
-  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4810/mod_folder/content/0/SURV730-Unit-3-slides-2016-summer.pdf?forcedownload=1
+  slides_link : http://jpsmonline.umd.edu/pluginfile.php/4813/mod_folder/content/0/SURV730-Unit-3-slides-2016-summer.pdf?forcedownload=1
 
 --- type:NormalExercise lang:r xp:50 skills:7  key:39a225af5a
 ## Association measures for categorical variables
@@ -108,9 +108,10 @@ options(digits = 4)
 *** =sct
 
 ```{r}
-test_function("cohen.kappa", args = "object",
-              not_called_msg = "You didn't call `cohen.kappa()`!",
-              incorrect_msg = "You didn't call `cohen.kappa(object = ...)` with the correct argument, `object`.")
+test_student_typed("tab_gender_GP %>% cohen.kappa")
+test_student_typed("tab_gender_GP %>% tetrachoric")
+test_student_typed("tab_gender_GP %>% phi")
+test_student_typed("tab_gender_GP %>% Yule")
 
 test_error()
 
