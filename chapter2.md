@@ -131,7 +131,7 @@ test_error()
 
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:7 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:7  key:8e9ece5b36
 
 ## Meaning of the association measures
 
@@ -159,7 +159,7 @@ test_mc(correct = 4)
 
 
 
---- type:NormalExercise lang:r xp:100 skills:7  
+--- type:NormalExercise lang:r xp:100 skills:7   key:24549c4cdc
 ## Simple latent class analysis
 
 The `antireli` data frame contains the "tolerance scale" from the 1987 General Social Survey discussed in Hagenaars & McCutcheon (2002). 
