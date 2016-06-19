@@ -166,7 +166,7 @@ The `antireli` data frame contains the "tolerance scale" from the 1987 General S
 
 The code to the right runs the two-class example given in the slides. 
 
-More description of this type of latent class modeling is in the Biemer book as well as in [http://daob.nl/wp-content/papercite-data/pdf/oberski2016mixturemodels.pdf](this introductory text).
+More description of this type of latent class modeling is in the Biemer book as well as in [this introductory text](http://daob.nl/wp-content/papercite-data/pdf/oberski2016mixturemodels.pdf).
 
 *** =instructions 
 - With three dichotomous indicators, two classes is the maximum amount of information we can extract from these data. Verify this by fitting a three class model and encountering a problem.
