@@ -114,10 +114,13 @@ test_student_typed("tab_gender_GP %>% phi")
 test_student_typed("tab_gender_GP %>% Yule")
 test_student_typed("tab_gender_GP %>% my_log_odds_ratio")
 
-test_output_regex("gndr2:dshltgp2")
-test_output_regex("0\\.416")
-test_output_regex("dshltgp\\.gndr")
-test_output_regex("-0.104")
+test_output_regex("gndr2:dshltgp2", 
+  incorrect_msg = "There is a mistake in the Poisson regression (call to glm): you need to include the interaction between gender and GP.")
+test_output_regex("0\\.416", 
+  incorrect_msg = "I was looking for the correct log-odds ratio value (0.416..) in your output and could not find it. So something is still missing.")
+test_output_regex("dshltgp\\.gndr", incorrect_msg = "There is a mistake in the loglinear model (call to loglin): you need to include the interaction between gender and GP."))
+test_output_regex("-0.104", 
+incorrect_msg = "I was looking for the correct loglinear model interaction estimate (0.104..) in your output and could not find it. So something is still missing there.")
 
 test_error()
 
